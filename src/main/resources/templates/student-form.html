@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Student Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 480px; margin: 40px auto; padding: 0 16px; }
+        label { display: block; margin-top: 14px; font-weight: bold; }
+        input { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
+        .error { color: #c62828; font-size: 13px; }
+        .actions { margin-top: 20px; }
+        button, a.cancel { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer;
+                           font-size: 14px; text-decoration: none; color: #fff; }
+        button { background: #2e7d32; }
+        a.cancel { background: #757575; margin-left: 8px; }
+    </style>
+</head>
+<body>
+    <h1 th:text="${title}">Student Form</h1>
+
+    <form th:action="@{/students/save}" th:object="${student}" method="post">
+        <input type="hidden" th:field="*{id}">
+
+        <label>First Name</label>
+        <input type="text" th:field="*{firstName}">
+        <span class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+
+        <label>Last Name</label>
+        <input type="text" th:field="*{lastName}">
+        <span class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+
+        <label>Email</label>
+        <input type="text" th:field="*{email}">
+        <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+
+        <label>Course</label>
+        <input type="text" th:field="*{course}">
+        <span class="error" th:if="${#fields.hasErrors('course')}" th:errors="*{course}"></span>
+
+        <div class="actions">
+            <button type="submit">Save</button>
+            <a class="cancel" th:href="@{/students}">Cancel</a>
+        </div>
+    </form>
+</body>
+</html>
